@@ -38,7 +38,7 @@ dieta          CHAR(1) NOT NULL,
 epoca          VARCHAR(30) NOT NULL,
 nascimento     DATE NOT NULL,
 CONSTRAINT PK_DINOSSAUROS PRIMARY KEY (idDino),
-CONSTRAINT FK_DIN_ARE FOREIGN KEY (idArea) REFERENCES tb_AREAS (idArea),
+CONSTRAINT FK_ARE_DIN FOREIGN KEY (idArea) REFERENCES tb_AREAS (idArea),
 CONSTRAINT CK_SEX CHECK (sexo IN ('M', 'F')),
 CONSTRAINT CK_DIET CHECK (dieta IN ('C', 'H', 'O')),
 CONSTRAINT CK_NASC CHECK (nascimento >= TO_DATE('1993-06-13', 'YYYY-MM-DD'))
@@ -50,12 +50,15 @@ CONSTRAINT CK_NASC CHECK (nascimento >= TO_DATE('1993-06-13', 'YYYY-MM-DD'))
 CREATE TABLE tb_FUNCIONARIOS(
 idFuncionario   NUMBER(7) NOT NULL,
 idArea          NUMBER(7) NOT NULL, --VINCULADA AREA
-placaVeículo    CHAR(4) NOT NULL --VINCULADA VEÍCULOS --Pode ser nulo?
+placa		    CHAR(4) NULL, --VINCULADA VEÍCULOS --Pode ser nulo?
 nome            VARCHAR(50) NOT NULL,
 idade           NUMBER(3) NOT NULL,           
 sexo            CHAR(1) NOT NULL,
 dataIngresso    DATE NOT NULL,
-funcao          VARCHAR(20) NOT NULL         
+funcao          VARCHAR(20) NOT NULL,
+CONSTRAINT PK_DINOSSAUROS PRIMARY KEY (idFuncionario),
+CONSTRAINT FK_ARE_FUNC FOREIGN KEY (idArea) REFERENCES tb_AREAS (idArea),
+CONSTRAINT FK_VEI_FUNC FOREIGN KEY (placa) REFERENCES tb_VEICULOS (placa)
 );
 
 -- -----------------------------------------------------
@@ -68,14 +71,15 @@ status          CHAR(1) NOT NULL,
 ano             NUMBER(4) NOT NULL,
 cargaMax        NUMBER(7) NOT NULL,
 capTanque       NUMBER(4) NOT NULL,
-ultimaRevisao   DATE NULL
+ultimaRevisao   DATE NULL,
+CONSTRAINT PK_VEICULOS PRIMARY KEY (placa),
 );
 
 -- -----------------------------------------------------
 -- Table tb_FUNCIONARIOSVEICULOS
 -- -----------------------------------------------------
 CREATE TABLE tb_FUNCIONARIOSVEICULOS(
-idEmprestimo	NUMBER(7),
+idEmprestimo	NUMBER(7) NOT NULL,
 idFuncionario	NUMBER(7) NOT NULL,
 placa			CHAR(4) NOT NULL
 retirada		DATE NOT NULL,
@@ -97,7 +101,9 @@ tipo            VARCHAR(20) NOT NULL,
 duracao         NUMBER(3) NOT NULL,
 equipeFunc      NUMBER(3) NOT NULL,
 horarios        VARCHAR(10) NOT NULL,
-qtdPublico      NUMBER(6) NOT NULL
+qtdPublico      NUMBER(6) NOT NULL,
+CONSTRAINT PK_ PRIMARY KEY (atracao),
+CONSTRAINT FK_ARE_ATR FOREIGN KEY (idArea) REFERENCES tb_AREAS (idArea),
 );
 
 -- -----------------------------------------------------
@@ -107,9 +113,9 @@ CREATE TABLE tb_AREASATRACOES(
 idEvento	NUMBER(7),
 idArea		NUMBER(7) NOT NULL,
 atracao		VARCHAR(50) NOT NULL,
-CONSTRAINT PK_EVENTO PRIMARY KEY (idEvento),
-CONSTRAINT FK_ARE FOREIGN KEY (idArea) REFERENCES tb_AREAS (idArea),
-CONSTRAINT FK_ATR FOREIGN KEY (atracao) REFERENCES tb_ATRACOES (atracao)
+CONSTRAINT PK_AREASATRACOES PRIMARY KEY (idEvento),
+CONSTRAINT FK_ARE_AREATR FOREIGN KEY (idArea) REFERENCES tb_AREAS (idArea),
+CONSTRAINT FK_ATR_AREATR FOREIGN KEY (atracao) REFERENCES tb_ATRACOES (atracao)
 );
 
 
