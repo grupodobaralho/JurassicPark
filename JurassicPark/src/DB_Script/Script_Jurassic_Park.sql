@@ -20,7 +20,7 @@ capacidadeMax  NUMBER(6) NOT NULL,
 coberta        CHAR(1) NOT NULL,
 setor          VARCHAR(2) NOT NULL,
 CONSTRAINT PK_AREAS PRIMARY KEY (id_Area),
-CONSTRAINT CK_TIPO CHECK (tipoTerreno IN ('Arenoso', 'Argiloso', 'Floresta', 'Aquatico', 'Pantano')),
+CONSTRAINT CK_TIPO CHECK (tipoTerreno IN ('Arenoso', 'Argiloso', 'Floresta', 'Aquatico', 'Pantano','Escritorio','Laboratorio')),
 CONSTRAINT CK_METR CHECK (metragem > 0),
 CONSTRAINT CK_POP CHECK (populacao >= 0),
 CONSTRAINT CK_COB CHECK (coberta IN ('S', 'N'))
@@ -210,35 +210,6 @@ VALUES ('DL26','Lancha para Funcionarios', 'A', 2016, 60, 9 , NULL);
 
 
 
-INSERT INTO tb_FUNCOES (id_funcao, funcao, salariobase)
-VALUES (100, 'Tratador', 4000);
-
-INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
-VALUES (200, 'Seguranca', 5000);
-
-INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase) ----??????????????
-VALUES (300, 'Capa_De_Chuva', 6500);
-
-INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
-VALUES (400, 'Guia', 5000);
-
-INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
-VALUES (500, 'Veterinario', 10000);
-
-INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
-VALUES (600, 'Cientista', 15000);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -312,6 +283,15 @@ VALUES ('Aquario Jurassico', 41, 'Aquatico', 1350, 4, 8,'S', 'L');
 INSERT INTO tb_AREAS (nomearea,id_Area, tipoTerreno, metragem, populacao, capacidadeMax, coberta, setor)
 VALUES ('Terra dos Tirassonauros', 2, 'Arenoso', 200, 2, 2,'S', 'S');
 
+INSERT INTO tb_AREAS (nomearea,id_Area, tipoTerreno, metragem, populacao, capacidadeMax, coberta, setor)
+VALUES ('Laboratório de pesquisas', 1000, 'Laboratorio', 700, 10, 20,'S', 'SE');
+
+INSERT INTO tb_AREAS (nomearea,id_Area, tipoTerreno, metragem, populacao, capacidadeMax, coberta, setor)
+VALUES ('Escritório Administrativo', 1001, 'Escritorio', 650, 12, 25,'S', 'SE');
+
+
+
+
 
 
 
@@ -375,6 +355,121 @@ VALUES (96, 19, 'Bone Backed Dino', 'Spinosaurus', 'Espinossauro', 'M', 6.1 , 85
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (71, 12, 'Juno', 'Velociraptor mongoliensis', 'Velociraptor,', 'M', 1.7 , 100 , 'C', 'Cretaceo',  TO_DATE('1993-07-07', 'YYYY-MM-DD'));
+
+INSERT INTO tb_FUNCOES (id_funcao, funcao, salariobase)
+VALUES (100, 'Tratador', 4000);
+
+INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
+VALUES (200, 'Seguranca', 5000);
+
+INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
+VALUES (300, 'Capa_De_Chuva', 6500);
+
+INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
+VALUES (400, 'Guia', 5000);
+
+INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
+VALUES (500, 'Veterinario', 10000);
+
+INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
+VALUES (600, 'Cientista', 15000);
+
+INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
+VALUES (700, 'Administrativo', 2000);
+
+
+
+
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1610430, 200, 44, 'Israel Deorce', 22, 'M', TO_DATE('2016-03-01', 'YYYY-MM-DD'), 1.11);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(3698524, 200, 48, 'Roberto Antunes', 44, 'M', TO_DATE('2013-08-17', 'YYYY-MM-DD'), 1.05);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1548973, 200, 66, 'Felícia Ferreira', 36, 'F', TO_DATE('2002-06-16', 'YYYY-MM-DD'), 1.5);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(3116634, 200, 1, 'Pedro Antunes', 52, 'F', TO_DATE('1994-11-22', 'YYYY-MM-DD'), 2);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1996517, 300, 1, 'Marcio Fagundes', 33, 'M', TO_DATE('2008-09-15', 'YYYY-MM-DD'), 1.6);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1886214, 300, 39, 'Andreia Paz', 29, 'F', TO_DATE('2010-09-14', 'YYYY-MM-DD'), 1.3);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1986214, 300, 66, 'Marcelo Pontiguar',52, 'M', TO_DATE('1995-09-15', 'YYYY-MM-DD'), 1.9);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1459873, 300, 3, 'Mark Andrews', 24, 'M', TO_DATE('2016-10-17', 'YYYY-MM-DD'), 1);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(5556987, 400, 2, 'Sam Neil', 69, 'M', TO_DATE('1991-02-17', 'YYYY-MM-DD'), 2.5);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1613595, 400, 7, 'Laura Dern', 54, 'F', TO_DATE('1991-07-22', 'YYYY-MM-DD'), 2.5);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(7982693, 400, 66, 'Mary Sheen', 26, 'F', TO_DATE('2011-05-16', 'YYYY-MM-DD'), 1.4);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(2643298, 400, 67, 'Ronaldo Carlos', 33, 'M', TO_DATE('2008-04-18', 'YYYY-MM-DD'), 1.5);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(6532484, 100, 3, 'João Romero',43, 'M', TO_DATE('2011-03-01', 'YYYY-MM-DD'), 1.3);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(2145682, 100, 1, 'Alan Grant', 29, 'M', TO_DATE('2014-08-07', 'YYYY-MM-DD'), 1.2);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(6389651, 100, 3, 'Alexia Murphy',39, 'F', TO_DATE('2016-04-19', 'YYYY-MM-DD'), 1);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(4235987, 100, 44, 'Sasha Grey', 28, 'F', TO_DATE('2012-06-15', 'YYYY-MM-DD'), 1.2);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(7752157, 100, 66, 'Robert Dean', 24, 'M', TO_DATE('2013-09-12', 'YYYY-MM-DD'), 1.1);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1245734, 500, 2, 'Navarro Bowmann', 52, 'M', TO_DATE('1991-03-21', 'YYYY-MM-DD'), 2.3);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1110863, 500, 55, 'Fabricio Pontes', 39, 'M', TO_DATE('2006-01-03', 'YYYY-MM-DD'), 1.6);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1459324, 500, 39, 'Lily Aldrin', 32, 'F', TO_DATE('2001-10-13', 'YYYY-MM-DD'), 1.8);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1111111, 600, 1000, 'Steven Spielberg', 69, 'M', TO_DATE('1990-11-20', 'YYYY-MM-DD'), 5);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(1298641, 600, 1000, 'Peter Willians', 45, 'M', TO_DATE('1999-10-29', 'YYYY-MM-DD'), 2);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(2356876, 600, 1000, 'Brittany Newhouse', 41, 'F', TO_DATE('1998-10-07', 'YYYY-MM-DD'), 2.1);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(6359718, 700, 1001, 'Diego Arão', 39, 'M', TO_DATE('2004-11-06', 'YYYY-MM-DD'), 1.5);
+
+INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
+VALUES(5741255, 700, 1001, 'Mariana Paixão', 25, 'M', TO_DATE('2015-12-02', 'YYYY-MM-DD'), 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
