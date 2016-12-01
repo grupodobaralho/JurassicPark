@@ -58,7 +58,7 @@ CONSTRAINT CK_NASC CHECK (nascimento >= TO_DATE('1975-01-01', 'YYYY-MM-DD'))
 -- -----------------------------------------------------
 CREATE TABLE tb_VEICULOS(
 placa           CHAR(4) NOT NULL,
-modelo          VARCHAR(20) NOT NULL,
+tipo            VARCHAR(50) NOT NULL,
 status          CHAR(1) NOT NULL,
 ano             NUMBER(4) NOT NULL,
 cargaMax        NUMBER(7) NOT NULL,
