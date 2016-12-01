@@ -327,7 +327,7 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (58, 2, 'Ms.T-Rex', 'Tyrannosaurus', 'Tiranossauro,', 'F', 6 , 10500 , 'C', 'Cretaceo', TO_DATE('1988-09-02', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (103, 7, 'Nanico', 'Diplodocus', 'Diplodoco,', 'M', 45 , 37500 , 'H', 'Jurassico', TO_DATE('1999-08-19', 'YYYY-MM-DD'));
+VALUES (103, 7, 'Nanico', 'Diplodocus', 'Diplodoco', 'M', 45 , 37500 , 'H', 'Jurassico', TO_DATE('1999-08-19', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (19, 66, 'Rei do pantano', 'Triceratops horridus', 'Triceratops', 'M', 4 , 7000 , 'H', 'Cretaceo', TO_DATE('1982-03-11', 'YYYY-MM-DD'));
