@@ -489,3 +489,108 @@ VALUES (1459324, 'BK95', TO_DATE('2016-05-31', 'YYYY-MM-DD'), TO_DATE('2016-06-0
 --INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
 --VALUES(40, 001, 200, TO_DATE('2016-03-01 15:00', 'YYYY-MM-DD HH24:MI'));
 
+
+
+--------------------------------------------------------------------------------
+--a. 5 consultas básicas envolvendo os comandos distinct, order by,
+--count(*), like, in e funções de manipulação de datas.
+
+--1) Quantidade de espécies distintas
+SELECT COUNT(DISTINCT dino.especie) QTD_ESPECIES
+FROM tb_dinossauros dino;
+
+--2) Todos dinossauros do mais velho ao mais novo
+SELECT dino.nome NOME, dino.especie ESPECIE, FLOOR((SYSDATE - dino.nascimento)/365) IDADE
+FROM tb_dinossauros dino
+ORDER BY IDADE DESC;
+
+--3) Todas as espécies que não possuem 'sauro' no nome
+SELECT dino.especie ESPECIE
+FROM tb_dinossauros dino
+WHERE dino.especie NOT LIKE '%sauro%';
+
+--4) Todas dinossaouros fêmeas que pesam menos que 10000kg e não são herbivoras
+SELECT *
+FROM tb_dinossauros dino
+WHERE dino.sexo like 'F' AND dino.peso < 10000 AND dino.dieta like 'H';
+
+--5) Todas os veículos que não estão ativos
+SELECT veiculo.placa PLACA, veiculo.status STATUS
+FROM tb_veiculos veiculo
+WHERE veiculo.status IN ('M', 'I');
+
+
+--------------------------------------------------------------------------------
+--b. 5 consultas das quais 2 envolvam junções entre duas tabelas e 3
+--envolvam junções entre três ou mais tabelas.
+
+--1) Quantidade de dinossauros e de espécies por área
+SELECT area.nomearea, COUNT(dino.id_dino) QTD_DINOS, COUNT(DISTINCT dino.especie)
+FROM tb_dinossauros dino INNER JOIN tb_areas area ON dino.id_area = area.id_area
+GROUP BY area.nomearea;
+
+--2) Quantidade de funcionarios por funcao
+SELECT funcao.funcao, COUNT(func.id_funcionario) QTD_FUNCIONARIOS
+FROM tb_funcoes funcao INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
+GROUP BY funcao.funcao;
+
+--3) Retorna os Eventos que possuem Tyranosaurus a partir da data e hora atual
+SELECT dino.nome, atracao.nome EVENTO, area.nomearea AREA, TO_CHAR(evento.datahoraevento, 'dd/mm/yyyy hh24:mi') HORA, evento.qtdpublico CAPACIDADE
+FROM tb_dinossauros dino
+    INNER JOIN tb_areas area ON dino.id_area = area.id_area
+    INNER JOIN tb_areasatracoes evento ON area.id_area = evento.id_area
+    INNER JOIN tb_atracoes atracao ON atracao.id_atracao = evento.id_atracao
+WHERE dino.nomeCientifico like 'Tyranosaurus%' AND evento.datahoraevento >= SYSDATE;
+
+--4) Retorna os veículos que estão com algum funcionário
+SELECT vec.placa PLACA, func.nome NOME, funcvec.retirada RETIRADA, funcvec.devolucao DEVOLUCAO
+FROM tb_veiculos vec
+    INNER JOIN tb_funcionariosveiculos funcvec ON vec.placa = funcvec.placa
+    INNER JOIN tb_funcionarios func ON funcvec.id_funcionario = func.id_funcionario
+WHERE funcvec.devolucao IS NULL;
+
+--5) Retorna a quantidade de funcionários, a quantidade de dinossauros e a relação funcionário/dinossauro para cada área
+SELECT area.nomearea AREA, COUNT(func.id_funcionario) QTD_FUNCIONARIOS, COUNT(dino.id_dino) QTD_DINOS, ROUND(COUNT(func.id_funcionario)/COUNT(dino.id_dino),2) RELACAO
+FROM tb_funcionarios func
+    INNER JOIN tb_areas area ON func.id_area = area.id_area
+    INNER JOIN tb_dinossauros dino ON area.id_area = dino.id_area
+GROUP BY (area.nomearea);
+
+
+--------------------------------------------------------------------------------
+--c. 5 consultas envolvendo group by e having, juntamente com funções
+--de agregação.
+
+--1) Retorna quantidade de veículos por ano
+SELECT veiculo.ano ANO, COUNT(veiculo.ano) FROTA
+FROM tb_veiculos veiculo
+GROUP BY veiculo.ano
+ORDER BY veiculo.ano;
+
+--2)Retorna a media salarial dos funcionários por área
+SELECT area.nomearea AREA, ROUND(AVG(func.multipsal*funcao.salariobase),2) MEDIA_SALARIAL
+FROM tb_funcoes funcao
+    INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
+    INNER JOIN tb_areas area ON func.id_area = area.id_area
+GROUP BY area.nomearea;
+
+--3)Status da capacidade de transporte da frota
+SELECT vec.status STATUS, SUM(vec.cargamax) CAPACIDADE_TRANSPORTE
+FROM tb_veiculos vec
+GROUP BY vec.status;
+
+--4)Mostra as areas em que o menor salário é ao menos 6000
+SELECT area.nomearea AREA, MIN(func.multipsal*funcao.salariobase) SALARIO
+FROM tb_funcoes funcao
+    INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
+    INNER JOIN tb_areas area ON func.id_area = area.id_area
+GROUP BY area.nomearea
+HAVING MIN(func.multipsal*funcao.salariobase) >= 6000;
+
+--5)Mostra as áreas que tiverem ao total menos de 500 pessoas de público no último mês
+SELECT area.nomearea AREA, SUM(qtdpublico) PUBLICO_MES
+FROM tb_areas area INNER JOIN tb_areasatracoes aa
+ON area.id_area = aa.id_area
+WHERE aa.datahoraevento BETWEEN SYSDATE - 30 AND SYSDATE
+GROUP BY area.nomearea
+HAVING (SUM(qtdpublico) < 500);
