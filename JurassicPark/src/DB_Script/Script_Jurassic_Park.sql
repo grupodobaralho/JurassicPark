@@ -458,63 +458,28 @@ VALUES(5741255, 700, 1001, 'Mariana Paixão', 25, 'M', TO_DATE('2015-12-02', 'YYY
 
 
 
+INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada)
+VALUES (1610430, 'AA98', TO_DATE('2016-08-11', 'YYYY-MM-DD'));
+
+INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada)
+VALUES (7982693, 'GT09', TO_DATE('2016-05-29', 'YYYY-MM-DD'));
+
+INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada)
+VALUES (6389651, 'IK38', TO_DATE('2015-08-22', 'YYYY-MM-DD'));
+
+INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada, DEVOLUCAO )
+VALUES (1110863, 'KJ95', TO_DATE('2014-08-11', 'YYYY-MM-DD') , TO_DATE('2014-09-14', 'YYYY-MM-DD' ));
+
+INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada, DEVOLUCAO)
+VALUES (2145682, 'IL02', TO_DATE('2013-11-08', 'YYYY-MM-DD'), TO_DATE('2015-10-09', 'YYYY-MM-DD'));
+
+INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada, DEVOLUCAO)
+VALUES (1459324, 'BK95', TO_DATE('2016-05-31', 'YYYY-MM-DD'), TO_DATE('2016-06-01', 'YYYY-MM-DD'));
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-----VINI, seguem exemplos pra tu te basear 
---INSERT INTO tb_AREAS (id_Area,nomearea, tipoTerreno, metragem, populacao, capacidadeMax, coberta, setor)
---VALUES (40,'Cavernola', 'Arenoso', 2500, 13, 20,'N', 'S');
---
---INSERT INTO tb_DINOSSAUROS (Id_Dino, Id_Area, nome, nomeCientífico, especie, sexo, altura, peso, dieta, epoca, nascimento)
---VALUES (23, 40, 'Apolo', 'Basilosaurus', 'Basilossauro', 'M', 18, 36, 'C', 'Eoceno', TO_DATE('1993-08-26', 'YYYY-MM-DD'));
---
-----VINE, ultimarevisao pode ser null, então para veículos novos não insere
---INSERT INTO tb_VEICULOS (placa, modelo, status, ano, cargamax, captanque, ultimarevisao)
---VALUES ('JP01', 'Jeep Turbo', 'A', 1999, 3, 100, TO_DATE('2016-08-26', 'YYYY-MM-DD'));
---
-----As funcoes abaixo ja sao suficiente, se nao quiser nao precisa add mais nenhuma
---INSERT INTO tb_FUNCOES (id_funcao, funcao, salariobase)
---VALUES (100, 'Tratador', 4000);
---
---INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
---VALUES (200, 'Seguranca', 5000);
---
---INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
---VALUES (300, 'Capa_De_Chuva', 6500);
---
---INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
---VALUES (400, 'Guia', 5000);
---
---INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
---VALUES (500, 'Veterinario', 10000);
---
---INSERT INTO tb_Funcoes (id_funcao, funcao, salariobase)
---VALUES (600, 'Cientista', 15000);
---
-----exemplo tb_FUNCIONARIOS
---INSERT INTO tb_FUNCIONARIOS(id_funcionario, id_funcao, id_area, nome, idade, sexo, dataingresso, multipsal)
---VALUES(1610427, 300, 40, 'ISRA', 23, 'M', TO_DATE('2016-03-01', 'YYYY-MM-DD'), 1.11);
---
-----exemplo tb_FUNCIONARIOSVEICULOS --exemplo sem devolucao
---INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada)
---VALUES (1610427, 'JP01', TO_DATE('2016-03-01', 'YYYY-MM-DD'));
 --
 ----exemplo tb_ATRACOES
 --INSERT INTO tb_ATRACOES(id_atracao, nome, tipo, duracao, equipefunc)
