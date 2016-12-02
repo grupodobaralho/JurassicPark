@@ -15,6 +15,9 @@ public class Program {
 		
 		//--a. 5 consultas básicas envolvendo os comandos distinct, order by,
 		//--count(*), like, in e funções de manipulação de datas.
+		System.out.println("-------------------------------CONSULTAS A-------------------------------");
+		System.out.println("a. 5 consultas básicas envolvendo os comandos distinct, order by, ");
+		System.out.println("count(*), like, in e funções de manipulação de datas.\n");
 		
 		//--A1) Quantidade de espécies distintas
 		Consultas.consultaA1(conn);
@@ -33,8 +36,11 @@ public class Program {
 		
 		
 		
-		//--b. 5 consultas das quais 2 envolvam junções entre duas tabelas e 3
-		//--envolvam junções entre três ou mais tabelas.
+		//--b. 5 consultas das quais 2 envolvam junções entre duas tabelas e 
+		//--3 envolvam junções entre três ou mais tabelas.
+		System.out.println("\n\n\n-------------------------------CONSULTAS B-------------------------------");
+		System.out.println("b. 5 consultas das quais 2 envolvam junções entre duas tabelas e ");
+		System.out.print("3 envolvam junções entre três ou mais tabelas.");
 		
 		//--B1) Quantidade de dinossauros e de espécies por área
 		Consultas.consultaB1(conn);
@@ -55,40 +61,45 @@ public class Program {
 		
 		//--c. 5 consultas envolvendo group by e having, juntamente com funções
 		//--de agregação.
-		
+		System.out.println("\n\n\n-------------------------------CONSULTAS C-------------------------------");
+		System.out.println("c. 5 consultas envolvendo group by e having, juntamente com funções");
+		System.out.print("de agregação.");
+				
 		//--C1) Retorna quantidade de veículos por ano
-		//Consultas.consultaC1(conn);
+		Consultas.consultaC1(conn);
 		
 		//--C2) Retorna a media salarial dos funcionários por área
-		//Consultas.consultaC2(conn);
+		Consultas.consultaC2(conn);
 		
 		//--C3) Status da capacidade de transporte da frota
-		//Consultas.consultaC3(conn);
+		Consultas.consultaC3(conn);
 		
 		//--C4) Mostra as areas em que o menor salário é ao menos 6000
-		//Consultas.consultaC4(conn);
+		Consultas.consultaC4(conn);
 		
 		//--C5) Mostra as áreas que tiverem eventos e somaram menos de 500 pessoas de público em eventos no último mês
-		//Consultas.consultaC5(conn);
+		Consultas.consultaC5(conn);
 		
 		
 		
 		//--d. 5 consultas envolvendo sub-consultas.
+		System.out.println("\n\n\n-------------------------------CONSULTAS D-------------------------------");
+		System.out.print("d. 5 consultas envolvendo sub-consultas.");
 		
 		//--D1) Nome e altura dos dinossauros que habitam areas maiores de 5000m2
-		//Consultas.consultaD1(conn);
+		Consultas.consultaD1(conn);
 		
 		//--D2) Nome e sexo dos funcionários que trabalham em terreno arenoso
-		//Consultas.consultaD2(conn);
+		Consultas.consultaD2(conn);
 		
 		//--D3) Mostra funcionarios que trabalham no Sul
-		//Consultas.consultaD3(conn);
+		Consultas.consultaD3(conn);
 		
 		//--D4) Mostra funções que trabalham no coberto e as áreas 
-		//Consultas.consultaD4(conn);
+		Consultas.consultaD4(conn);
 		
-		//--D5) Mostra todo funcionário e sua função que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
-		//Consultas.consultaD5(conn);
+		//--D5) Mostra cada funcionário, e sua função, que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
+		Consultas.consultaD5(conn);
 		
 		
 		conn.close();

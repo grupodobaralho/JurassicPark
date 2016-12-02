@@ -700,20 +700,22 @@ FROM tb_veiculos vec
 GROUP BY vec.status;
 
 --C4) Mostra as areas em que o menor salário é ao menos 6000
-SELECT area.nomearea AREA, MIN(func.multipsal*funcao.salariobase) SALARIO
+SELECT area.nomearea AREA, MIN(func.multipsal*funcao.salariobase) MENOR_SALARIO
 FROM tb_funcoes funcao
     INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
     INNER JOIN tb_areas area ON func.id_area = area.id_area
 GROUP BY area.nomearea
-HAVING MIN(func.multipsal*funcao.salariobase) >= 6000;
+HAVING MIN(func.multipsal*funcao.salariobase) >= 6000
+ORDER BY MENOR_SALARIO;
 
---C5) Mostra as áreas que tiverem ao total menos de 500 pessoas de público em eventos no último mês
+--C5) Mostra as áreas que tiverem eventos e somaram menos de 500 pessoas de público em eventos no último mês
 SELECT area.nomearea AREA, SUM(qtdpublico) PUBLICO_MES
 FROM tb_areas area INNER JOIN tb_areasatracoes aa
 ON area.id_area = aa.id_area
 WHERE aa.datahoraevento BETWEEN SYSDATE - 30 AND SYSDATE
 GROUP BY area.nomearea
-HAVING (SUM(qtdpublico) < 500);
+HAVING (SUM(qtdpublico) < 500)
+ORDER BY PUBLICO_MES;
 
 --------------------------------------------------------------------------------
 --d. 5 consultas envolvendo sub-consultas.
@@ -754,8 +756,8 @@ WHERE area.id_area IN
     WHERE coberta LIKE 'S')
 ORDER BY FUNCAO;
     
---D5) Mostra todo funcionário e sua função que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
-SELECT func.nome NOME_FUNCIONARIO, funcao.funcao FUNCAO
+--D5) Mostra cada funcionário, e sua função, que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
+SELECT func.nome NOME, funcao.funcao FUNCAO
 FROM tb_funcionarios func INNER JOIN tb_funcoes funcao 
 	ON func.id_funcao = funcao.id_funcao
 WHERE func.multipsal > 1.5 AND funcao.id_funcao NOT IN

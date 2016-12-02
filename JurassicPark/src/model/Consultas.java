@@ -110,6 +110,7 @@ public class Consultas {
 	}
 	
 	
+	
 	//-----------------------------------------CONSULTAS B-----------------------------------------
 	//--B1) Quantidade de dinossauros e de espécies por área
 	public static void consultaB1(Connection connection) throws SQLException {
@@ -228,51 +229,250 @@ public class Consultas {
 		rs.close();
 	}
 		
-		
+	
+	
 	//-----------------------------------------CONSULTAS C-----------------------------------------
 	//--C1) Retorna quantidade de veículos por ano
-	
+	public static void consultaC1(Connection connection) throws SQLException {
+		String sql = "SELECT veiculo.ano ANO, COUNT(veiculo.ano) FROTA " +
+				 "FROM tb_veiculos veiculo " + 
+				 "GROUP BY veiculo.ano " +
+				 "ORDER BY ANO";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta c1) Retorna quantidade de veículos por ano:");
+		System.out.println("ANO, FROTA");
+		while (rs.next()) {					
+			int ano = rs.getInt("ano");
+			int frota = rs.getInt("frota");
+			System.out.println(ano + ", " + frota);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
 	//--C2) Retorna a media salarial dos funcionários por área
-	
+	public static void consultaC2(Connection connection) throws SQLException {
+		String sql = "SELECT area.nomearea AREA, ROUND(AVG(func.multipsal*funcao.salariobase),2) MEDIA_SALARIAL " +
+				 "FROM tb_funcoes funcao " + 
+				 	"INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao " +
+				 	"INNER JOIN tb_areas area ON func.id_area = area.id_area " +
+				 "GROUP BY area.nomearea " +
+				 "ORDER BY MEDIA_SALARIAL";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta c2) Retorna a media salarial dos funcionários por área:");
+		System.out.println("AREA, MEDIA_SALARIAL");
+		while (rs.next()) {					
+			String area = rs.getString("area");
+			double mediaSalarial = rs.getDouble("media_salarial");
+			System.out.println(area + ", " + mediaSalarial);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
 	//--C3) Status da capacidade de transporte da frota
-	
+	public static void consultaC3(Connection connection) throws SQLException {
+		String sql = "SELECT vec.status STATUS, SUM(vec.cargamax) CAPACIDADE_TRANSPORTE " +
+				 "FROM tb_veiculos vec " + 
+				 "GROUP BY vec.status";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta c3) Status da capacidade de transporte da frota:");
+		System.out.println("STATUS, CAPACIDADE_TRANSPORTE");
+		while (rs.next()) {					
+			String status = rs.getString("status");
+			int capacidadeTransporte = rs.getInt("capacidade_transporte");
+			System.out.println(status + ", " + capacidadeTransporte +" toneladas");
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
 	//--C4) Mostra as areas em que o menor salário é ao menos 6000
-	
+	public static void consultaC4(Connection connection) throws SQLException {
+		String sql = "SELECT area.nomearea AREA, MIN(func.multipsal*funcao.salariobase) MENOR_SALARIO " +
+				 "FROM tb_funcoes funcao " + 
+				 	"INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao " +
+				 	"INNER JOIN tb_areas area ON func.id_area = area.id_area " +
+				 "GROUP BY area.nomearea " +
+				 "HAVING MIN(func.multipsal*funcao.salariobase) >= 6000 " + 
+				 "ORDER BY MENOR_SALARIO";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta c4) Mostra as areas em que o menor salário é ao menos 6000:");
+		System.out.println("AREA, MENOR_SALARIO");
+		while (rs.next()) {					
+			String area = rs.getString("area");
+			double menorSalario = rs.getDouble("menor_salario");
+			System.out.println(area + ", " + menorSalario);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
 	//--C5) Mostra as áreas que tiverem eventos e somaram menos de 500 pessoas de público em eventos no último mês
+	public static void consultaC5(Connection connection) throws SQLException {
+		String sql = "SELECT area.nomearea AREA, SUM(qtdpublico) PUBLICO_MES " +
+				 "FROM tb_areas area INNER JOIN tb_areasatracoes aa " + 
+				 	"ON area.id_area = aa.id_area " +
+				 "WHERE aa.datahoraevento BETWEEN SYSDATE - 30 AND SYSDATE " +
+				 "GROUP BY area.nomearea " +
+				 "HAVING (SUM(qtdpublico) < 500) " + 
+				 "ORDER BY PUBLICO_MES";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta c5) Mostra as áreas que tiverem eventos e somaram menos de 500 pessoas de público em eventos no último mês:");
+		System.out.println("AREA, PUBLICO_MES");
+		while (rs.next()) {					
+			String area = rs.getString("area");
+			int publicoMes = rs.getInt("publico_mes");
+			System.out.println(area + ", " + publicoMes);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
-	
-	
-	
-	
-	
+		
 	//-----------------------------------------CONSULTAS D-----------------------------------------
 	//--D1) Nome e altura dos dinossauros que habitam areas maiores de 5000m2
-	
+	public static void consultaD1(Connection connection) throws SQLException {
+		String sql = "SELECT dino.nome NOME, dino.altura ALTURA " +
+				 "FROM tb_dinossauros dino " + 
+				 "WHERE dino.id_dino IN " +
+				 	"(SELECT dino2.id_dino " +
+				 	"FROM tb_dinossauros dino2 INNER JOIN tb_areas area ON dino2.id_area = area.id_area " +
+				 	"WHERE area.metragem > 5000)";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta d1) Nome e altura dos dinossauros que habitam areas maiores de 5000m2:");
+		System.out.println("NOME, ALTURA");
+		while (rs.next()) {					
+			String nome = rs.getString("nome");
+			double altura = rs.getDouble("altura");
+			System.out.println(nome + ", " + altura);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
 	//--D2) Nome e sexo dos funcionários que trabalham em terreno arenoso
-	
+	public static void consultaD2(Connection connection) throws SQLException {
+		String sql = "SELECT func.nome NOME, func.sexo SEXO " +
+				 "FROM tb_funcionarios func " + 
+				 "WHERE func.id_funcionario IN " +
+				 	"(SELECT func2.id_funcionario " +
+				 	"FROM tb_funcionarios func2 INNER JOIN tb_areas area ON func2.id_area = area.id_area " +
+				 	"WHERE area.tipoterreno LIKE 'Arenoso')";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta d2) Nome e sexo dos funcionários que trabalham em terreno arenoso:");
+		System.out.println("NOME, SEXO");
+		while (rs.next()) {					
+			String nome = rs.getString("nome");
+			String sexo = rs.getString("sexo");
+			System.out.println(nome + ", " + sexo);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
 	//--D3) Mostra funcionarios que trabalham no Sul
-	
+	public static void consultaD3(Connection connection) throws SQLException {
+		String sql = "SELECT func.nome NOME, area.setor SETOR " +
+				 "FROM tb_funcionarios func INNER JOIN tb_areas area ON func.id_area = area.id_area " + 
+				 "WHERE area.id_area IN " +
+				 	"(SELECT area2.id_area " +
+				 	"FROM tb_areas area2 " +
+				 	"WHERE area.setor LIKE 'S')";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta d3) Mostra funcionarios que trabalham no Sul:");
+		System.out.println("NOME, SETOR");
+		while (rs.next()) {					
+			String nome = rs.getString("nome");
+			String setor = rs.getString("setor");
+			System.out.println(nome + ", " + setor);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
 	//--D4) Mostra funções que trabalham no coberto e as áreas 
+	public static void consultaD4(Connection connection) throws SQLException {
+		String sql = "SELECT DISTINCT funcao.funcao FUNCAO, area.nomearea AREA " +
+				 "FROM tb_funcoes funcao " + 
+				 	"INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao " + 
+				 	"INNER JOIN tb_areas area ON func.id_area = area.id_area " + 
+				 "WHERE area.id_area IN " +
+				 	"(SELECT area2.id_area " +
+				 	"FROM tb_areas area2 " +
+				 	"WHERE coberta LIKE 'S') " +
+				 	"ORDER BY FUNCAO";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta d4) Mostra funções que trabalham no coberto e as áreas:");
+		System.out.println("FUNCAO, AREA");
+		while (rs.next()) {					
+			String funcao = rs.getString("funcao");
+			String area = rs.getString("area");
+			System.out.println(funcao + ", " + area);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
-	
-	//--D5) Mostra todo funcionário e sua função que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
-
+	//--D5) Mostra cada funcionário, e sua função, que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
+	public static void consultaD5(Connection connection) throws SQLException {
+		String sql = "SELECT func.nome NOME, funcao.funcao FUNCAO " +
+				 "FROM tb_funcionarios func INNER JOIN tb_funcoes funcao " + 
+				 	"ON func.id_funcao = funcao.id_funcao " + 
+				 "WHERE func.multipsal > 1.5 AND funcao.id_funcao NOT IN " +
+				 	"(SELECT funcao2.id_funcao " +
+				 	"FROM tb_funcoes funcao2 " +
+				 	"WHERE funcao2.salariobase <= 5000)";
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		
+		System.out.println("\n\nConsulta d5) Mostra cada funcionário, e sua função, que tem fator multiplicativo maior que 1.5 e salário base maior que 5000:");
+		System.out.println("NOME, FUNCAO");
+		while (rs.next()) {					
+			String nome = rs.getString("nome");
+			String funcao = rs.getString("funcao");
+			System.out.println(nome + ", " + funcao);
+		}
+		
+		statement.close();
+		rs.close();
+	}
 	
 	
 }
