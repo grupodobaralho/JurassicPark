@@ -58,45 +58,27 @@ public class Consultas {
 		statement.close();
 		rs.close();
 		
-	}
-	
-	//--4) Todas dinossaouros fêmeas que pesam menos que 10000kg e não são herbivoras
-		public static void consultaA4(Connection connection) throws SQLException {
-			String sql = "SELECT * " + 
-					 "FROM tb_dinossauros dino " + 
-					 "WHERE dino.sexo like 'F' AND dino.peso < 10000 AND dino.dieta like 'H' ";
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
-			
-			while (rs.next()) {	
-				int id_dino = rs.getInt("id_dino");
-				int id_area = rs.getInt("id_area");
-				String nome = rs.getString("nome");					
-				String nomecientifico = rs.getString("nomecientifico");	
-				String especie = rs.getString("especie");
-				String sexo = rs.getString("sexo");	
-				System.out.println(especie);
-			}
-			
-			statement.close();
-			rs.close();
-			
-		}	
+	}	
+
 		
-	//--3) Retorna os Eventos que possuem Tyranosaurus a partir da data e hora atual
+	//B--3) Retorna os Eventos que possuem Tyranosaurus a partir da data e hora atual
 		public static void consultaB3(Connection connection) throws SQLException {
 			String sql = "SELECT dino.nome, atracao.nome EVENTO, area.nomearea AREA, TO_CHAR(evento.datahoraevento, 'dd/mm/yyyy hh24:mi') HORA, evento.qtdpublico CAPACIDADE " + 
 					 "FROM tb_dinossauros dinoo " + 
 					 " INNER JOIN tb_areas area ON dino.id_area = area.id_area " +
 					 " INNER JOIN tb_areasatracoes evento ON area.id_area = evento.id_area " +
 				" INNER JOIN tb_atracoes atracao ON atracao.id_atracao = evento.id_atracao " +
-				" WHERE dino.nomeCientifico like 'Tyranosaurus%' AND evento.datahoraevento >= SYSDATE; ";
+				" WHERE dino.nomeCientifico LIKE 'Tyrannosaurus%' AND evento.datahoraevento >= SYSDATE; ";
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
 			
 			while (rs.next()) {			
-				String especie = rs.getString("especie");			
-				System.out.println(especie);
+				String nome = rs.getString("nome");		
+				String evento = rs.getString("evento");
+				String area = rs.getString("area");
+				String hora = rs.getString("hora");
+				String capacidade = rs.getString("capacidade");
+				System.out.println(nome + "\t" + evento + "\t" + area  + "\t" + hora + "\t" + capacidade);
 			}
 			
 			statement.close();

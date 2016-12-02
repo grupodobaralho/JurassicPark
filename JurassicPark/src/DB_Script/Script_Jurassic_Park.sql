@@ -657,7 +657,7 @@ FROM tb_dinossauros dino
     INNER JOIN tb_areas area ON dino.id_area = area.id_area
     INNER JOIN tb_areasatracoes evento ON area.id_area = evento.id_area
     INNER JOIN tb_atracoes atracao ON atracao.id_atracao = evento.id_atracao
-WHERE dino.nomeCientifico LIKE 'Tyranosaurus%' AND evento.datahoraevento >= SYSDATE;
+WHERE dino.nomeCientifico LIKE 'Tyrannosaurus%' AND evento.datahoraevento >= SYSDATE;
 
 --4) Retorna os veículos que estão com algum funcionário
 SELECT vec.placa PLACA, func.nome NOME, funcvec.retirada RETIRADA, funcvec.devolucao DEVOLUCAO
