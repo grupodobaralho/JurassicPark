@@ -733,7 +733,7 @@ WHERE func.id_funcionario IN
     WHERE area.tipoterreno LIKE 'Arenoso')
 ORDER BY SEXO, NOME;
 
---3)Mostra funcionarios que trabalham no S
+--3)Mostra funcionarios que trabalham no Sul
 SELECT func.nome NOME, area.setor SETOR
 FROM tb_funcionarios func INNER JOIN tb_areas area ON func.id_area = area.id_area
 WHERE area.id_area IN
@@ -750,3 +750,14 @@ WHERE area.id_area IN
     (SELECT area2.id_area
     FROM tb_areas area2
     WHERE coberta LIKE 'S');
+    
+ --5)Mostra todo funcionário e sua função que tem fator multiplicativo maior que 1.5 e salário base maior ou igual a 4000
+ SELECT func.nome NOME_FUNCIONARIO, funcao.funcao FUNCAO
+FROM tb_funcionarios func INNER JOIN tb_funcoes funcao 
+ ON func.id_funcao = funcao.id_funcao
+WHERE func.multipsal > 1.5 AND funcao.id_funcao NOT IN
+ (SELECT funcao2.id_funcao
+ FROM tb_funcoes funcao2
+ WHERE funcao2.salariobase < 4000);
+    
+ --5
