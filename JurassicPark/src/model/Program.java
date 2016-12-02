@@ -1,3 +1,5 @@
+package model;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -13,7 +15,8 @@ public class Program {
 		
 		//--a. 5 consultas básicas envolvendo os comandos distinct, order by,
 		//--count(*), like, in e funções de manipulação de datas.
-
+		Consultas.consultaA1(conn);
+		
 		//--1) Quantidade de espécies distintas
 		//Consultas.consultaA1(conn);
 		
