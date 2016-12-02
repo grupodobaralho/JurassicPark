@@ -321,10 +321,10 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (66, 1, 'Papa-leguas', 'Velociraptor mongoliensis', 'Velociraptor', 'F', 2.1 , 110 , 'C', 'Cretaceo', TO_DATE('1991-8-12', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (60, 2, 'Sr.T-Rex', 'Tyrannosaurus', 'Tiranossauro,', 'M', 6.7 , 11000 , 'C', 'Cretaceo', TO_DATE('1990-10-25', 'YYYY-MM-DD'));
+VALUES (60, 2, 'Sr.T-Rex', 'Tyrannosaurus', 'Tiranossauro', 'M', 6.7 , 11000 , 'C', 'Cretaceo', TO_DATE('1990-10-25', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (58, 2, 'Ms.T-Rex', 'Tyrannosaurus', 'Tiranossauro,', 'F', 6 , 10500 , 'C', 'Cretaceo', TO_DATE('1988-09-02', 'YYYY-MM-DD'));
+VALUES (58, 2, 'Ms.T-Rex', 'Tyrannosaurus', 'Tiranossauro', 'F', 6 , 10500 , 'C', 'Cretaceo', TO_DATE('1988-09-02', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (103, 7, 'Nanico', 'Diplodocus', 'Diplodoco', 'M', 45 , 37500 , 'H', 'Jurassico', TO_DATE('1999-08-19', 'YYYY-MM-DD'));
@@ -357,7 +357,7 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (71, 12, 'Juno', 'Velociraptor mongoliensis', 'Velociraptor', 'M', 1.7 , 100 , 'C', 'Cretaceo',  TO_DATE('1993-07-07', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (178, 1, 'Baby T-rex', 'Tyrannosaurus', 'Tiranossauro,', 'M', 5 , 8500 , 'C', 'Cretaceo', TO_DATE('2008-10-12', 'YYYY-MM-DD'));
+VALUES (178, 1, 'Baby T-rex', 'Tyrannosaurus', 'Tiranossauro', 'M', 5 , 8500 , 'C', 'Cretaceo', TO_DATE('2008-10-12', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (235, 66, 'Princesa do pantano', 'Triceratops horridus', 'Triceratops', 'F', 1.1 , 2300, 'H', 'Cretaceo', TO_DATE('2015-10-21', 'YYYY-MM-DD'));
@@ -611,26 +611,26 @@ VALUES(1, 002, 20, TO_DATE('2016-11-30 18:30', 'YYYY-MM-DD HH24:MI'));
 --a. 5 consultas básicas envolvendo os comandos distinct, order by,
 --count(*), like, in e funções de manipulação de datas.
 
---1) Quantidade de espécies distintas
+--A1) Quantidade de espécies distintas
 SELECT COUNT(DISTINCT dino.especie) QTD_ESPECIES
 FROM tb_dinossauros dino;
 
---2) Todos dinossauros do mais velho ao mais novo
+--A2) Todos dinossauros do mais velho ao mais novo
 SELECT dino.nome NOME, dino.especie ESPECIE, FLOOR((SYSDATE - dino.nascimento)/365) IDADE
 FROM tb_dinossauros dino
 ORDER BY IDADE DESC;
 
---3) Todas as espécies que não possuem 'sauro' no nome
+--A3) Todas as espécies que não possuem 'sauro' no nome
 SELECT DISTINCT dino.especie ESPECIE
 FROM tb_dinossauros dino
 WHERE dino.especie NOT LIKE '%sauro%';
 
---4) Todas dinossaouros fêmeas que pesam menos que 10000kg e não são herbivoras
+--A4) Todas dinossaouros fêmeas que pesam menos que 10000kg e não são herbivoras
 SELECT *
 FROM tb_dinossauros dino
 WHERE dino.sexo like 'F' AND dino.peso < 10000 AND dino.dieta like 'H';
 
---5) Todas os veículos que não estão ativos
+--A5) Todas os veículos que não estão ativos
 SELECT veiculo.placa PLACA, veiculo.status STATUS
 FROM tb_veiculos veiculo
 WHERE veiculo.status IN ('M', 'I');
@@ -640,33 +640,35 @@ WHERE veiculo.status IN ('M', 'I');
 --b. 5 consultas das quais 2 envolvam junções entre duas tabelas e 3
 --envolvam junções entre três ou mais tabelas.
 
---1) Quantidade de dinossauros e de espécies por área
+--B1) Quantidade de dinossauros e de espécies por área
 SELECT area.nomearea, COUNT(dino.id_dino) QTD_DINOS, COUNT(DISTINCT dino.especie)
 FROM tb_dinossauros dino INNER JOIN tb_areas area ON dino.id_area = area.id_area
 GROUP BY area.nomearea;
 
---2) Quantidade de funcionarios por funcao
+--B2) Quantidade de funcionarios por funcao
 SELECT funcao.funcao FUNCAO, COUNT(func.id_funcionario) QTD_FUNCIONARIOS
 FROM tb_funcoes funcao INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
 GROUP BY funcao.funcao
 ORDER BY FUNCAO;
 
---3) Retorna os Eventos que possuem Tyrannosaurus a partir da data e hora atual
+--B3) Retorna os Eventos que possuem Tyrannosaurus a partir da data e hora atual
 SELECT dino.nome, atracao.nome EVENTO, area.nomearea AREA, TO_CHAR(evento.datahoraevento, 'dd/mm/yyyy hh24:mi') HORA, evento.qtdpublico CAPACIDADE
 FROM tb_dinossauros dino
     INNER JOIN tb_areas area ON dino.id_area = area.id_area
     INNER JOIN tb_areasatracoes evento ON area.id_area = evento.id_area
     INNER JOIN tb_atracoes atracao ON atracao.id_atracao = evento.id_atracao
-WHERE dino.nomeCientifico LIKE 'Tyrannosaurus%' AND evento.datahoraevento >= SYSDATE;
+WHERE dino.nomeCientifico LIKE 'Tyrannosaurus%' AND evento.datahoraevento >= SYSDATE
+ORDER BY HORA;
 
---4) Retorna os veículos que estão com algum funcionário
+--B4) Retorna os veículos que estão com algum funcionário
 SELECT vec.placa PLACA, func.nome NOME, funcvec.retirada RETIRADA, funcvec.devolucao DEVOLUCAO
 FROM tb_veiculos vec
     INNER JOIN tb_funcionariosveiculos funcvec ON vec.placa = funcvec.placa
     INNER JOIN tb_funcionarios func ON funcvec.id_funcionario = func.id_funcionario
-WHERE funcvec.devolucao IS NULL;
+WHERE funcvec.devolucao IS NULL
+ORDER BY RETIRADA;
 
---5) Retorna a quantidade de funcionários, a quantidade de dinossauros e a relação funcionário/dinossauro para cada área
+--B5) Retorna a quantidade de funcionários, a quantidade de dinossauros e a relação funcionário/dinossauro para cada área
 SELECT area.nomearea AREA, COUNT(DISTINCT func.id_funcionario) QTD_FUNCIONARIOS, COUNT(DISTINCT dino.id_dino) QTD_DINOS, ROUND(COUNT(DISTINCT func.id_funcionario)/COUNT(DISTINCT dino.id_dino),2) RELACAO
 FROM tb_funcionarios func
     INNER JOIN tb_areas area ON func.id_area = area.id_area
@@ -678,13 +680,13 @@ GROUP BY (area.nomearea);
 --c. 5 consultas envolvendo group by e having, juntamente com funções
 --de agregação.
 
---1) Retorna quantidade de veículos por ano
+--C1) Retorna quantidade de veículos por ano
 SELECT veiculo.ano ANO, COUNT(veiculo.ano) FROTA
 FROM tb_veiculos veiculo
 GROUP BY veiculo.ano
 ORDER BY ANO;
 
---2)Retorna a media salarial dos funcionários por área
+--C2) Retorna a media salarial dos funcionários por área
 SELECT area.nomearea AREA, ROUND(AVG(func.multipsal*funcao.salariobase),2) MEDIA_SALARIAL
 FROM tb_funcoes funcao
     INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
@@ -692,12 +694,12 @@ FROM tb_funcoes funcao
 GROUP BY area.nomearea
 ORDER BY MEDIA_SALARIAL;
 
---3)Status da capacidade de transporte da frota
+--C3) Status da capacidade de transporte da frota
 SELECT vec.status STATUS, SUM(vec.cargamax) CAPACIDADE_TRANSPORTE
 FROM tb_veiculos vec
 GROUP BY vec.status;
 
---4)Mostra as areas em que o menor salário é ao menos 6000
+--C4) Mostra as areas em que o menor salário é ao menos 6000
 SELECT area.nomearea AREA, MIN(func.multipsal*funcao.salariobase) SALARIO
 FROM tb_funcoes funcao
     INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
@@ -705,7 +707,7 @@ FROM tb_funcoes funcao
 GROUP BY area.nomearea
 HAVING MIN(func.multipsal*funcao.salariobase) >= 6000;
 
---5)Mostra as áreas que tiverem ao total menos de 500 pessoas de público em eventos no último mês
+--C5) Mostra as áreas que tiverem ao total menos de 500 pessoas de público em eventos no último mês
 SELECT area.nomearea AREA, SUM(qtdpublico) PUBLICO_MES
 FROM tb_areas area INNER JOIN tb_areasatracoes aa
 ON area.id_area = aa.id_area
@@ -716,7 +718,7 @@ HAVING (SUM(qtdpublico) < 500);
 --------------------------------------------------------------------------------
 --d. 5 consultas envolvendo sub-consultas.
 
---1) Nome e altura dos dinossauros que habitam areas maiores de 5000m2
+--D1) Nome e altura dos dinossauros que habitam areas maiores de 5000m2
 SELECT dino.nome NOME, dino.altura ALTURA
 FROM tb_dinossauros dino
 WHERE dino.id_dino IN 
@@ -724,7 +726,7 @@ WHERE dino.id_dino IN
     FROM tb_dinossauros dino2 INNER JOIN tb_areas area ON dino2.id_area = area.id_area
     WHERE area.metragem > 5000);
 
---2) Nome e sexo dos funcionários que trabalham em terreno arenoso
+--D2) Nome e sexo dos funcionários que trabalham em terreno arenoso
 SELECT func.nome NOME, func.sexo SEXO
 FROM tb_funcionarios func
 WHERE func.id_funcionario IN 
@@ -733,7 +735,7 @@ WHERE func.id_funcionario IN
     WHERE area.tipoterreno LIKE 'Arenoso')
 ORDER BY SEXO, NOME;
 
---3)Mostra funcionarios que trabalham no Sul
+--D3) Mostra funcionarios que trabalham no Sul
 SELECT func.nome NOME, area.setor SETOR
 FROM tb_funcionarios func INNER JOIN tb_areas area ON func.id_area = area.id_area
 WHERE area.id_area IN
@@ -741,7 +743,7 @@ WHERE area.id_area IN
     FROM tb_areas area2
     WHERE area.setor LIKE 'S');
 
---4)Mostra funções que trabalham no coberto e as áreas 
+--D4) Mostra funções que trabalham no coberto e as áreas 
 SELECT DISTINCT funcao.funcao FUNCAO, area.nomearea AREA
 FROM tb_funcoes funcao
     INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
@@ -752,7 +754,7 @@ WHERE area.id_area IN
     WHERE coberta LIKE 'S')
 ORDER BY FUNCAO;
     
---5)Mostra todo funcionário e sua função que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
+--D5) Mostra todo funcionário e sua função que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
 SELECT func.nome NOME_FUNCIONARIO, funcao.funcao FUNCAO
 FROM tb_funcionarios func INNER JOIN tb_funcoes funcao 
 	ON func.id_funcao = funcao.id_funcao
