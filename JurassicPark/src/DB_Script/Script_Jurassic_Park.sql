@@ -541,7 +541,7 @@ FROM tb_dinossauros dino
     INNER JOIN tb_areas area ON dino.id_area = area.id_area
     INNER JOIN tb_areasatracoes evento ON area.id_area = evento.id_area
     INNER JOIN tb_atracoes atracao ON atracao.id_atracao = evento.id_atracao
-WHERE dino.nomeCientifico like 'Tyranosaurus%' AND evento.datahoraevento >= SYSDATE;
+WHERE dino.nomeCientifico LIKE 'Tyranosaurus%' AND evento.datahoraevento >= SYSDATE;
 
 --4) Retorna os veículos que estão com algum funcionário
 SELECT vec.placa PLACA, func.nome NOME, funcvec.retirada RETIRADA, funcvec.devolucao DEVOLUCAO
@@ -596,3 +596,41 @@ ON area.id_area = aa.id_area
 WHERE aa.datahoraevento BETWEEN SYSDATE - 30 AND SYSDATE
 GROUP BY area.nomearea
 HAVING (SUM(qtdpublico) < 500);
+
+--------------------------------------------------------------------------------
+--d. 5 consultas envolvendo sub-consultas.
+
+--1) Nome e altura dos dinossauros que habitam areas maiores de 5000m2
+SELECT dino.nome NOME, dino.altura ALTURA
+FROM tb_dinossauros dino
+WHERE dino.id_dino IN 
+  (SELECT dino2.id_dino
+    FROM tb_dinossauros dino2 INNER JOIN tb_areas area ON dino2.id_area = area.id_area
+    WHERE area.metragem > 5000);
+
+--2) Nome e altura dos dinossauros que habitam areas maiores de 5000m2
+SELECT func.nome NOME, func.sexo SEXO
+FROM tb_funcionarios func
+WHERE func.id_funcionario IN 
+  (SELECT func2.id_funcionario
+    FROM tb_funcionarios func2 INNER JOIN tb_areas area ON func2.id_area = area.id_area
+    WHERE area.tipoterreno LIKE 'Arenoso')
+ORDER BY SEXO, NOME;
+
+--3)Mostra funcionarios que trabalham no S
+SELECT func.nome NOME, area.setor SETOR
+FROM tb_funcionarios func INNER JOIN tb_areas area ON func.id_area = area.id_area
+WHERE area.id_area IN
+    (SELECT area2.id_area
+    FROM tb_areas area2
+    WHERE area.setor LIKE 'S');
+
+--4)Mostra funções que trabalham no coberto e as áreas 
+SELECT DISTINCT funcao.funcao FUNCAO, area.nomearea AREA
+FROM tb_funcoes funcao
+    INNER JOIN tb_funcionarios func ON funcao.id_funcao = func.id_funcao
+    INNER JOIN tb_areas area ON func.id_area = area.id_area
+WHERE area.id_area IN
+    (SELECT area2.id_area
+    FROM tb_areas area2
+    WHERE coberta LIKE 'S');
