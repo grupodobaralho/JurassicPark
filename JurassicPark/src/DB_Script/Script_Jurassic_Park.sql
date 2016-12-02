@@ -315,10 +315,10 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (88, 1, 'Celer Bird', 'Ornithomimosaurias rastiensas', 'Ornithomimosauria', 'M', 1.1 , 180 , 'C', 'Jurassico', TO_DATE('1997-12-25', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (68, 1, 'Coyote', 'Velociraptor mongoliensis', 'Velociraptor', 'M', 1.8 , 90 , 'C', 'Cretaceo', TO_DATE('1992-11-29', 'YYYY-MM-DD'));
+VALUES (68, 1, 'Coyote', 'Velociraptor mongoliensis', 'Velociraptor,', 'M', 1.8 , 90 , 'C', 'Cretaceo', TO_DATE('1992-11-29', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (66, 1, 'Papa-leguas', 'Velociraptor mongoliensis', 'Velociraptor', 'F', 2.1 , 110 , 'C', 'Cretaceo', TO_DATE('1991-8-12', 'YYYY-MM-DD'));
+VALUES (66, 1, 'Papa-leguas', 'Velociraptor mongoliensis', 'Velociraptor,', 'F', 2.1 , 110 , 'C', 'Cretaceo', TO_DATE('1991-8-12', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (60, 2, 'Sr.T-Rex', 'Tyrannosaurus', 'Tiranossauro,', 'M', 6.7 , 11000 , 'C', 'Cretaceo', TO_DATE('1990-10-25', 'YYYY-MM-DD'));
@@ -327,7 +327,7 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (58, 2, 'Ms.T-Rex', 'Tyrannosaurus', 'Tiranossauro,', 'F', 6 , 10500 , 'C', 'Cretaceo', TO_DATE('1988-09-02', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (103, 7, 'Nanico', 'Diplodocus', 'Diplodoco', 'M', 45 , 37500 , 'H', 'Jurassico', TO_DATE('1999-08-19', 'YYYY-MM-DD'));
+VALUES (103, 7, 'Nanico', 'Diplodocus', 'Diplodoco,', 'M', 45 , 37500 , 'H', 'Jurassico', TO_DATE('1999-08-19', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (19, 66, 'Rei do pantano', 'Triceratops horridus', 'Triceratops', 'M', 4 , 7000 , 'H', 'Cretaceo', TO_DATE('1982-03-11', 'YYYY-MM-DD'));
@@ -354,7 +354,18 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (96, 19, 'Bone Backed Dino', 'Spinosaurus', 'Espinossauro', 'M', 6.1 , 8500 , 'C', 'Cretaceo',  TO_DATE('1999-09-18', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (71, 12, 'Juno', 'Velociraptor mongoliensis', 'Velociraptor', 'M', 1.7 , 100 , 'C', 'Cretaceo',  TO_DATE('1993-07-07', 'YYYY-MM-DD'));
+VALUES (71, 12, 'Juno', 'Velociraptor mongoliensis', 'Velociraptor,', 'M', 1.7 , 100 , 'C', 'Cretaceo',  TO_DATE('1993-07-07', 'YYYY-MM-DD'));
+
+INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
+VALUES (178, 1, 'Baby T-rex', 'Tyrannosaurus', 'Tiranossauro,', 'M', 5 , 8500 , 'C', 'Cretaceo', TO_DATE('2008-10-12', 'YYYY-MM-DD'));
+
+INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
+VALUES (235, 66, 'Princesa do pantano', 'Triceratops horridus', 'Triceratops', 'F', 1.1 , 2300, 'H', 'Cretaceo', TO_DATE('2015-10-21', 'YYYY-MM-DD'));
+
+INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
+VALUES (223, 48, 'Darling', 'Argentinossaurus', 'Argentinossauro', 'F', 4 , 9900 , 'H', 'Cretaceo',  TO_DATE('2014-08-16', 'YYYY-MM-DD'));
+
+
 
 INSERT INTO tb_FUNCOES (id_funcao, funcao, salariobase)
 VALUES (100, 'Tratador', 4000);
@@ -458,6 +469,7 @@ VALUES(5741255, 700, 1001, 'Mariana Paixão', 25, 'M', TO_DATE('2015-12-02', 'YYY
 
 
 
+
 INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada)
 VALUES (1610430, 'AA98', TO_DATE('2016-08-11', 'YYYY-MM-DD'));
 
@@ -476,6 +488,110 @@ VALUES (2145682, 'IL02', TO_DATE('2013-11-08', 'YYYY-MM-DD'), TO_DATE('2015-10-0
 INSERT INTO tb_FUNCIONARIOSVEICULOS(id_funcionario, placa, retirada, DEVOLUCAO)
 VALUES (1459324, 'BK95', TO_DATE('2016-05-31', 'YYYY-MM-DD'), TO_DATE('2016-06-01', 'YYYY-MM-DD'));
 
+
+INSERT INTO tb_ATRACOES(id_atracao, nome, tipo, duracao, equipefunc)
+VALUES(001, 'Dinos Fofinhos', 'Kids', '90', 4);
+
+INSERT INTO tb_ATRACOES(id_atracao, nome, tipo, duracao, equipefunc)
+VALUES(002, 'Safari Selvagem', 'Família', '180', 7);
+
+INSERT INTO tb_ATRACOES(id_atracao, nome, tipo, duracao, equipefunc)
+VALUES(003, 'Dinossauros Aquáticos', 'Familia', '60', 6);
+
+INSERT INTO tb_ATRACOES(id_atracao, nome, tipo, duracao, equipefunc)
+VALUES(004, 'Dinos Aterrorizantes', 'Terror', '30', 3);
+
+INSERT INTO tb_ATRACOES(id_atracao, nome, tipo, duracao, equipefunc)
+VALUES(005, 'Passeio pelos laboratórios', 'Família', '60', 3);
+
+INSERT INTO tb_ATRACOES(id_atracao, nome, tipo, duracao, equipefunc)
+VALUES(006, 'Musical com dinossauros', 'Familia', '90', 10);
+
+INSERT INTO tb_ATRACOES(id_atracao, nome, tipo, duracao, equipefunc)
+VALUES(007, 'Dinos caçando no seu habitat ', 'Adulto', '60', 6);
+
+
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(40, 003, 300, TO_DATE('2016-11-30 16:00', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(40, 003, 300, TO_DATE('2016-12-01 17:35', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(41, 003, 150, TO_DATE('2016-12-07 15:20', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(41, 003, 100, TO_DATE('2016-12-04 13:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(2, 007, 15, TO_DATE('2016-11-28 18:10', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(2, 007, 15, TO_DATE('2016-12-05 09:00', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(40, 007, 8, TO_DATE('2016-11-30 19:00', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(1, 007, 10, TO_DATE('2016-12-06 16:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(1, 001, 150, TO_DATE('2016-11-28 10:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(31, 001, 230, TO_DATE('2016-12-03 18:00', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(66, 001, 180, TO_DATE('2016-12-09 13:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(45, 002, 20, TO_DATE('2016-11-30 17:25', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(55, 002, 25, TO_DATE('2016-12-03 08:45', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(45, 002, 25, TO_DATE('2016-12-02 16:40', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(1, 002, 20, TO_DATE('2016-11-29 14:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(13, 004, 20, TO_DATE('2016-12-04 19:50', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(2, 004, 15, TO_DATE('2016-12-03 16:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(52, 004, 20, TO_DATE('2016-11-27 20:40', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(64, 004, 30, TO_DATE('2016-11-29 21:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(1, 004, 25, TO_DATE('2016-11-30 20:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(1000, 005, 25, TO_DATE('2016-11-30 10:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(1000, 005, 35, TO_DATE('2016-11-30 16:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(1000, 005, 35, TO_DATE('2016-12-03 15:30', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(2, 006, 250, TO_DATE('2016-12-01 20:40', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(66, 006, 300, TO_DATE('2016-12-04 16:50', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(64, 006, 275, TO_DATE('2016-11-29 17:35', 'YYYY-MM-DD HH24:MI'));
+
+INSERT INTO tb_AREASATRACOES(id_area, id_atracao, qtdPublico, dataHoraEvento)
+VALUES(1, 002, 20, TO_DATE('2016-11-30 18:30', 'YYYY-MM-DD HH24:MI'));
 
 
 
