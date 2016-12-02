@@ -315,10 +315,10 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (88, 1, 'Celer Bird', 'Ornithomimosaurias rastiensas', 'Ornithomimosauria', 'M', 1.1 , 180 , 'C', 'Jurassico', TO_DATE('1997-12-25', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (68, 1, 'Coyote', 'Velociraptor mongoliensis', 'Velociraptor,', 'M', 1.8 , 90 , 'C', 'Cretaceo', TO_DATE('1992-11-29', 'YYYY-MM-DD'));
+VALUES (68, 1, 'Coyote', 'Velociraptor mongoliensis', 'Velociraptor', 'M', 1.8 , 90 , 'C', 'Cretaceo', TO_DATE('1992-11-29', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (66, 1, 'Papa-leguas', 'Velociraptor mongoliensis', 'Velociraptor,', 'F', 2.1 , 110 , 'C', 'Cretaceo', TO_DATE('1991-8-12', 'YYYY-MM-DD'));
+VALUES (66, 1, 'Papa-leguas', 'Velociraptor mongoliensis', 'Velociraptor', 'F', 2.1 , 110 , 'C', 'Cretaceo', TO_DATE('1991-8-12', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (60, 2, 'Sr.T-Rex', 'Tyrannosaurus', 'Tiranossauro,', 'M', 6.7 , 11000 , 'C', 'Cretaceo', TO_DATE('1990-10-25', 'YYYY-MM-DD'));
@@ -327,7 +327,7 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (58, 2, 'Ms.T-Rex', 'Tyrannosaurus', 'Tiranossauro,', 'F', 6 , 10500 , 'C', 'Cretaceo', TO_DATE('1988-09-02', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (103, 7, 'Nanico', 'Diplodocus', 'Diplodoco,', 'M', 45 , 37500 , 'H', 'Jurassico', TO_DATE('1999-08-19', 'YYYY-MM-DD'));
+VALUES (103, 7, 'Nanico', 'Diplodocus', 'Diplodoco', 'M', 45 , 37500 , 'H', 'Jurassico', TO_DATE('1999-08-19', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (19, 66, 'Rei do pantano', 'Triceratops horridus', 'Triceratops', 'M', 4 , 7000 , 'H', 'Cretaceo', TO_DATE('1982-03-11', 'YYYY-MM-DD'));
@@ -354,7 +354,7 @@ INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sex
 VALUES (96, 19, 'Bone Backed Dino', 'Spinosaurus', 'Espinossauro', 'M', 6.1 , 8500 , 'C', 'Cretaceo',  TO_DATE('1999-09-18', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
-VALUES (71, 12, 'Juno', 'Velociraptor mongoliensis', 'Velociraptor,', 'M', 1.7 , 100 , 'C', 'Cretaceo',  TO_DATE('1993-07-07', 'YYYY-MM-DD'));
+VALUES (71, 12, 'Juno', 'Velociraptor mongoliensis', 'Velociraptor', 'M', 1.7 , 100 , 'C', 'Cretaceo',  TO_DATE('1993-07-07', 'YYYY-MM-DD'));
 
 INSERT INTO tb_DINOSSAUROS (id_Dino, id_Area, nome, nomeCientifico, especie, sexo, altura, peso, dieta, epoca, nascimento)
 VALUES (178, 1, 'Baby T-rex', 'Tyrannosaurus', 'Tiranossauro,', 'M', 5 , 8500 , 'C', 'Cretaceo', TO_DATE('2008-10-12', 'YYYY-MM-DD'));
@@ -651,7 +651,7 @@ FROM tb_funcoes funcao INNER JOIN tb_funcionarios func ON funcao.id_funcao = fun
 GROUP BY funcao.funcao
 ORDER BY FUNCAO;
 
---3) Retorna os Eventos que possuem Tyranosaurus a partir da data e hora atual
+--3) Retorna os Eventos que possuem Tyrannosaurus a partir da data e hora atual
 SELECT dino.nome, atracao.nome EVENTO, area.nomearea AREA, TO_CHAR(evento.datahoraevento, 'dd/mm/yyyy hh24:mi') HORA, evento.qtdpublico CAPACIDADE
 FROM tb_dinossauros dino
     INNER JOIN tb_areas area ON dino.id_area = area.id_area
@@ -667,7 +667,7 @@ FROM tb_veiculos vec
 WHERE funcvec.devolucao IS NULL;
 
 --5) Retorna a quantidade de funcionários, a quantidade de dinossauros e a relação funcionário/dinossauro para cada área
-SELECT area.nomearea AREA, COUNT(DISTINCT func.id_funcionario) QTD_FUNCIONARIOS, COUNT(DISTINCT dino.id_dino) QTD_DINOS, ROUND(COUNT(DISTINCT func.id_funcionario)/COUNT(dino.id_dino),2) RELACAO
+SELECT area.nomearea AREA, COUNT(DISTINCT func.id_funcionario) QTD_FUNCIONARIOS, COUNT(DISTINCT dino.id_dino) QTD_DINOS, ROUND(COUNT(DISTINCT func.id_funcionario)/COUNT(DISTINCT dino.id_dino),2) RELACAO
 FROM tb_funcionarios func
     INNER JOIN tb_areas area ON func.id_area = area.id_area
     INNER JOIN tb_dinossauros dino ON area.id_area = dino.id_area
@@ -705,7 +705,7 @@ FROM tb_funcoes funcao
 GROUP BY area.nomearea
 HAVING MIN(func.multipsal*funcao.salariobase) >= 6000;
 
---5)Mostra as áreas que tiverem ao total menos de 500 pessoas de público no último mês
+--5)Mostra as áreas que tiverem ao total menos de 500 pessoas de público em eventos no último mês
 SELECT area.nomearea AREA, SUM(qtdpublico) PUBLICO_MES
 FROM tb_areas area INNER JOIN tb_areasatracoes aa
 ON area.id_area = aa.id_area
@@ -724,7 +724,7 @@ WHERE dino.id_dino IN
     FROM tb_dinossauros dino2 INNER JOIN tb_areas area ON dino2.id_area = area.id_area
     WHERE area.metragem > 5000);
 
---2) Nome e altura dos dinossauros que habitam areas maiores de 5000m2
+--2) Nome e sexo dos funcionários que trabalham em terreno arenoso
 SELECT func.nome NOME, func.sexo SEXO
 FROM tb_funcionarios func
 WHERE func.id_funcionario IN 
@@ -749,15 +749,15 @@ FROM tb_funcoes funcao
 WHERE area.id_area IN
     (SELECT area2.id_area
     FROM tb_areas area2
-    WHERE coberta LIKE 'S');
+    WHERE coberta LIKE 'S')
+ORDER BY FUNCAO;
     
- --5)Mostra todo funcionário e sua função que tem fator multiplicativo maior que 1.5 e salário base maior ou igual a 4000
- SELECT func.nome NOME_FUNCIONARIO, funcao.funcao FUNCAO
+--5)Mostra todo funcionário e sua função que tem fator multiplicativo maior que 1.5 e salário base maior que 5000
+SELECT func.nome NOME_FUNCIONARIO, funcao.funcao FUNCAO
 FROM tb_funcionarios func INNER JOIN tb_funcoes funcao 
- ON func.id_funcao = funcao.id_funcao
+	ON func.id_funcao = funcao.id_funcao
 WHERE func.multipsal > 1.5 AND funcao.id_funcao NOT IN
- (SELECT funcao2.id_funcao
- FROM tb_funcoes funcao2
- WHERE funcao2.salariobase < 4000);
+	(SELECT funcao2.id_funcao
+	FROM tb_funcoes funcao2
+	WHERE funcao2.salariobase <= 5000);
     
- --5

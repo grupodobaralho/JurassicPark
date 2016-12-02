@@ -15,22 +15,21 @@ public class Program {
 		
 		//--a. 5 consultas básicas envolvendo os comandos distinct, order by,
 		//--count(*), like, in e funções de manipulação de datas.
-		Consultas.consultaA1(conn);
 		
 		//--1) Quantidade de espécies distintas
-		//Consultas.consultaA1(conn);
+		Consultas.consultaA1(conn);
 		
 		//--2) Todos dinossauros do mais velho ao mais novo
-		//Consultas.consultaA2(conn);
+		Consultas.consultaA2(conn);
 		
 		//--3) Todas as espécies que não possuem 'sauro' no nome
-		//Consultas.consultaA3(conn)
+		Consultas.consultaA3(conn);
 		
 		//--4) Todas dinossaouros fêmeas que pesam menos que 10000kg e não são herbivoras
-		//Consultas.consultaA4(conn)
+		//Consultas.consultaA4(conn);
 		
 		//--5) Todas os veículos que não estão ativos
-		//Consultas.consultaA5(conn)
+		//Consultas.consultaA5(conn);
 		
 		
 		
